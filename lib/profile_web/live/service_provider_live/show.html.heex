@@ -1,0 +1,86 @@
+<h1>Show Service provider</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.service_provider_show_path(@socket, :show, @service_provider)}>
+    <.live_component
+      module={ProfileWeb.Service_providerLive.FormComponent}
+      id={@service_provider.id}
+      title={@page_title}
+      action={@live_action}
+      service_provider={@service_provider}
+      return_to={Routes.service_provider_show_path(@socket, :show, @service_provider)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @service_provider.email %>
+  </li>
+
+  <li>
+    <strong>Password:</strong>
+    <%= @service_provider.password %>
+  </li>
+
+  <li>
+    <strong>First name:</strong>
+    <%= @service_provider.first_name %>
+  </li>
+
+  <li>
+    <strong>Middle name:</strong>
+    <%= @service_provider.middle_name %>
+  </li>
+
+  <li>
+    <strong>Surname:</strong>
+    <%= @service_provider.surname %>
+  </li>
+
+  <li>
+    <strong>Phone number:</strong>
+    <%= @service_provider.phone_number %>
+  </li>
+
+  <li>
+    <strong>County:</strong>
+    <%= @service_provider.county %>
+  </li>
+
+  <li>
+    <strong>Social media:</strong>
+    <%= @service_provider.social_media %>
+  </li>
+
+  <li>
+    <strong>Image:</strong>
+    <%= @service_provider.image %>
+  </li>
+
+  <li>
+    <strong>Service:</strong>
+    <%= @service_provider.service %>
+  </li>
+
+  <li>
+    <strong>Organization:</strong>
+    <%= @service_provider.organization %>
+  </li>
+
+  <li>
+    <strong>Profession:</strong>
+    <%= @service_provider.profession %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @service_provider.description %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.service_provider_show_path(@socket, :edit, @service_provider), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.service_provider_index_path(@socket, :index) %></span>

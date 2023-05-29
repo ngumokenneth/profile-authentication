@@ -1,0 +1,63 @@
+<h1>Listing Service providers</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.service_provider_index_path(@socket, :index)}>
+    <.live_component
+      module={ProfileWeb.Service_providerLive.FormComponent}
+      id={@service_provider.id || :new}
+      title={@page_title}
+      action={@live_action}
+      service_provider={@service_provider}
+      return_to={Routes.service_provider_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Password</th>
+      <th>First name</th>
+      <th>Middle name</th>
+      <th>Surname</th>
+      <th>Phone number</th>
+      <th>County</th>
+      <th>Social media</th>
+      <th>Image</th>
+      <th>Service</th>
+      <th>Organization</th>
+      <th>Profession</th>
+      <th>Description</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="service_providers">
+    <%= for service_provider <- @service_providers do %>
+      <tr id={"service_provider-#{service_provider.id}"}>
+        <td><%= service_provider.email %></td>
+        <td><%= service_provider.password %></td>
+        <td><%= service_provider.first_name %></td>
+        <td><%= service_provider.middle_name %></td>
+        <td><%= service_provider.surname %></td>
+        <td><%= service_provider.phone_number %></td>
+        <td><%= service_provider.county %></td>
+        <td><%= service_provider.social_media %></td>
+        <td><%= service_provider.image %></td>
+        <td><%= service_provider.service %></td>
+        <td><%= service_provider.organization %></td>
+        <td><%= service_provider.profession %></td>
+        <td><%= service_provider.description %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.service_provider_show_path(@socket, :show, service_provider) %></span>
+          <span><%= live_patch "Edit", to: Routes.service_provider_index_path(@socket, :edit, service_provider) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: service_provider.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Service provider", to: Routes.service_provider_index_path(@socket, :new) %></span>
